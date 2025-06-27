@@ -11,12 +11,24 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import StepLR
 import torch.nn.utils as U
 
+# Set device to GPU if available, else CPU
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"Using device: {device}")
+
+if device=='cpu':
+    num_workers = 0
+    pin_memory = False
+else: 
+    num_workers = 2
+    pin_memory = True
+
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
 trainTransform  = tv.transforms.Compose([tv.transforms.ToTensor(), tv.transforms.Normalize((0.1307,), (0.3081,))])
 trainset = tv.datasets.MNIST(root='./data',  train=True,download=True, transform=transform)
-dataloader = torch.utils.data.DataLoader(trainset, batch_size=32, shuffle=True, num_workers=2, pin_memory=True)
+dataloader = torch.utils.data.DataLoader(trainset, batch_size=32, shuffle=True, num_workers=num_workers, pin_memory=pin_memory)
 testset = tv.datasets.MNIST(root='./data', train=False, download=True, transform=transform)
-testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False, num_workers=2, pin_memory=True)
+testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False, num_workers=num_workers, pin_memory=pin_memory)
+
 
 class UNet(nn.Module):
     def __init__(self):
@@ -50,9 +62,6 @@ class UNet(nn.Module):
         return x
 
 
-# Set device to GPU if available, else CPU
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(f"Using device: {device}")
 
 # ---------- basic 3×3 conv block ----------
 class ConvBlock(nn.Module):
@@ -176,7 +185,7 @@ latent_dim = 28*28
 model  = UNetFFF(latent_dim, device)
 
 
-n_epochs      = 15
+n_epochs      = 1
 learning_rate = 1e-4
 k_hutch       = 4          # Hutchinson samples
 ema_tau       = 0.999
