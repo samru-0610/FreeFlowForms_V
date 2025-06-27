@@ -23,7 +23,7 @@ Then you can import the package via
 import fff
 ```
 
-## Vrushali's Experiments: 
+## My Experiments: 
 
 ### Experiment 1 : UNet used for reconstruction and density learning of MNIST
 A lightweight U-Net was used as both encoder and decoder within the FFF framework to train on the MNIST dataset. This tests the flexibility of FFF with non-standard architectures and serves as a visual demonstration of one-step sampling and reconstruction.
