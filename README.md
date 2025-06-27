@@ -33,7 +33,7 @@ Run the "train_UNet.py" file.
 **The only thing here that is borrowed from the original code is the surrogate_loss calculation.**
 
 ### Experiment 2 : Gradient Curve Analysis
-We reproduced the cubic function toy example from Section 4.3 of the paper to empirically validate the claim that both the surrogate loss \( \mathcal{L}_g \) and the inverse loss \( \mathcal{L}_{f^{-1}} \) share the same critical points. We plot and compare gradients for both objectives across function parameterizations.
+We reproduced the cubic function toy example from Section 4.3 of the paper to empirically validate the claim that both the surrogate loss L_g and the inverse loss L_f-1 share the same critical points. We plot and compare gradients for both objectives across function parameterizations.
 
 Look at the "gradient_plotting.ipynb". 
 To run your own functions, you will have to hand-calculate the Lf-1 and Lg and then update the functions. 
@@ -45,4 +45,4 @@ To run your own functions, you will have to hand-calculate the Lf-1 and Lg and t
 2. train_UNet.py
 3. gradient_plotting.ipynb
 
-### I ran the UNet experiment over multiple ipynb files and google colab sessions, hence there are no logged plots here. But all the plots I used in my presentation are reproducible. 
+Note: I ran the UNet experiment over multiple ipynb files and google colab sessions, hence there are no logged plots here. But all the plots I used in my presentation are reproducible. 
